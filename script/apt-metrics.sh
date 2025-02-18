@@ -2,11 +2,8 @@
 
 set -e
 
-# Available updates are written to std.err
-APT_CHECK=$(/usr/lib/update-notifier/apt-check 2>&1)
-
-UPDATES=$(echo "$APT_CHECK" | cut -d ';' -f 1)
-SECURITY=$(echo "$APT_CHECK" | cut -d ';' -f 2)
+UPDATES=$(apt list --upgradable 2>/dev/null | wc -l)
+SECURITY=$(apt list --upgradable 2>/dev/null | grep "\-security" | wc -l)
 REBOOT=$([ -f /var/run/reboot-required ] && echo 1 || echo 0)
 
 echo "# HELP apt_upgrades_pending Apt package pending updates by origin."
