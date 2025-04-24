@@ -17,3 +17,5 @@ echo "apt_security_upgrades_pending ${SECURITY}"
 echo "# HELP node_reboot_required Node reboot is required for software updates."
 echo "# TYPE node_reboot_required gauge"
 echo "node_reboot_required ${REBOOT}"
+
+echo "# Last update $(date +'%F %T')"
